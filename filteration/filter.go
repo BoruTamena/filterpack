@@ -33,7 +33,7 @@ func Filter() (error, FilterResponseQuery) {
 		return err, FilterResponseQuery{}
 	}
 
-	if fp.Key != "" && fp.Op != "" && fp.Value != "" {
+	if fp.Key != "" || fp.Op != "" || fp.Value != "" {
 
 		_, err := strconv.Atoi(fp.Value)
 
