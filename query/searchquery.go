@@ -29,19 +29,19 @@ func (s *SearchParam) SearchQuery() string {
 
 // start with a give substring value
 func (s *SearchParam) StartWith() string {
-	return fmt.Sprintf(" %v like  %v%%", s.Key, s.Value)
+	return fmt.Sprintf(" %s like  %s%%", s.Key, s.Value)
 }
 
 // end with a give substring value
 func (s *SearchParam) EndWith() string {
 
-	return fmt.Sprintf(" %v like  %% %v", s.Key, s.Value)
+	return fmt.Sprintf(" %s like  %%%s", s.Key, s.Value)
 
 }
 
 // contain a give substring value
 
 func (s *SearchParam) Contain() string {
-	return fmt.Sprintf(" %v like  %% %v %%", s.Key, s.Value)
+	return fmt.Sprintf(" %s like  %%%s%%", s.Key, s.Value)
 
 }
