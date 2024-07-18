@@ -2,6 +2,7 @@ package query
 
 import (
 	"fmt"
+	"strconv"
 
 	"github.com/gin-gonic/gin"
 )
@@ -33,26 +34,28 @@ func (f FilterParam) Filter() string {
 
 // filter int value which is greater than specified value
 func (f FilterParam) FilterGt() string {
-
-	return fmt.Sprintf("where %v > %v", f.Key, f.Value)
+	val, _ := strconv.Atoi(f.Value)
+	return fmt.Sprintf("where %v > %v", f.Key, val)
 
 }
 
 // filter int value which is greater than or equal to  specified value
 func (f FilterParam) FilterGtEq() string {
-
-	return fmt.Sprintf("where %v >=%v", f.Key, f.Value)
+	val, _ := strconv.Atoi(f.Value)
+	return fmt.Sprintf("where %v >=%v", f.Key, val)
 
 }
 
 // // filter int value which is less than  specified value
 func (f FilterParam) FilterLt() string {
-	return fmt.Sprintf("where %v < %v", f.Key, f.Value)
+	val, _ := strconv.Atoi(f.Value)
+	return fmt.Sprintf("where %v < %v", f.Key, val)
 }
 
 // filter int value which ia less than or equal to  specified value
 func (f FilterParam) FilterLtEq() string {
-	return fmt.Sprintf("where %v >= %v ", f.Key, f.Value)
+	val, _ := strconv.Atoi(f.Value)
+	return fmt.Sprintf("where %v >= %v ", f.Key, val)
 }
 
 // filter  string value which is start with the   specified  substring value
