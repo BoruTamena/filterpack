@@ -11,7 +11,14 @@ var (
 	c = &gin.Context{}
 )
 
-func Search() (error, string) {
+type SearchResponseQuery struct {
+	Query     string
+	StartWith string
+	EndWith   string
+	Contain   string
+}
+
+func Search() (error, SearchResponseQuery) {
 
 	var s query.SearchParam
 
@@ -19,16 +26,21 @@ func Search() (error, string) {
 
 	if err != nil {
 
-		return err, ""
+		return err, SearchResponseQuery{}
 	}
 
 	if param.Key != "" && param.Value != "" {
 
-		res := s.SearchQuery()
+		res := SearchResponseQuery{
+			Query:     s.SearchQuery(),
+			StartWith: s.StartWith(),
+			EndWith:   s.EndWith(),
+			Contain:   s.Contain(),
+		}
 		return nil, res
 
 	}
 
-	return errors.New("please specify your query parmateries "), ""
+	return errors.New("please specify your query parmateries "), SearchResponseQuery{}
 
 }
