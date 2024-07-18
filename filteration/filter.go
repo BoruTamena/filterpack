@@ -26,24 +26,34 @@ func (f *FilterParam) BindFilterParam(c *gin.Context) (error, *FilterParam) {
 
 func (f FilterParam) Filter() string {
 
+	return fmt.Sprintf("where %v =%v ", f.Key, f.Value)
+
 }
 
 func (f FilterParam) FilterGt() string {
 
-	return fmt.Sprintf("where %v > $ %v", f.Key, f.Value)
+	return fmt.Sprintf("where %v > %v", f.Key, f.Value)
 
 }
 
 func (f FilterParam) FilterGtEq() string {
 
-	return fmt.Sprintf("where %v >= $ %v", f.Key, f.Value)
+	return fmt.Sprintf("where %v >%v or %v = %v", f.Key, f.Value, f.Key, f.Value)
 
 }
 
 func (f FilterParam) FilterLt() string {
-	return fmt.Sprintf("where %v < $ %v", f.Key, f.Value)
+	return fmt.Sprintf("where %v < %v", f.Key, f.Value)
 }
 
 func (f FilterParam) FilterLtEq() string {
-	return fmt.Sprintf("where %v >= $ %v", f.Key, f.Value)
+	return fmt.Sprintf("where %v > %v or %v = %v", f.Key, f.Value, f.Key, f.Value)
+}
+
+func (f FilterParam) StartWith() string {
+	return fmt.Sprintf(" %s like  %s%%", f.Key, f.Value)
+}
+
+func (f FilterParam) EndWith() string {
+	return fmt.Sprintf(" %s like  %%%s", f.Key, f.Value)
 }
