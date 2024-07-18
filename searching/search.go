@@ -29,7 +29,7 @@ func Search() (error, SearchResponseQuery) {
 		return err, SearchResponseQuery{}
 	}
 
-	if param.Key != "" && param.Value != "" {
+	if param.Key != "" || param.Value != "" {
 
 		res := SearchResponseQuery{
 			Query:     s.SearchQuery(),
