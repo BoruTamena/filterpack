@@ -1,6 +1,10 @@
 package filteration
 
-import "github.com/gin-gonic/gin"
+import (
+	"fmt"
+
+	"github.com/gin-gonic/gin"
+)
 
 type FilterParam struct {
 	Key   string `json:"key,omitempty"`
@@ -18,4 +22,28 @@ func (f *FilterParam) BindFilterParam(c *gin.Context) (error, *FilterParam) {
 
 	return nil, f
 
+}
+
+func (f FilterParam) Filter() string {
+
+}
+
+func (f FilterParam) FilterGt() string {
+
+	return fmt.Sprintf("where %v > $ %v", f.Key, f.Value)
+
+}
+
+func (f FilterParam) FilterGtEq() string {
+
+	return fmt.Sprintf("where %v >= $ %v", f.Key, f.Value)
+
+}
+
+func (f FilterParam) FilterLt() string {
+	return fmt.Sprintf("where %v < $ %v", f.Key, f.Value)
+}
+
+func (f FilterParam) FilterLtEq() string {
+	return fmt.Sprintf("where %v >= $ %v", f.Key, f.Value)
 }
